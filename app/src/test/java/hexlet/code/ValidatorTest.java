@@ -23,6 +23,8 @@ public class ValidatorTest {
         actual = schema.contains("test").isValid("testing");
         assertTrue(actual);
 
+        actual = true;
+
 
        // schema.minLength(6).contains("we");
       //  schema.contains("tes");
