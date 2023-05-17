@@ -1,16 +1,14 @@
 package hexlet.code.shemas;
 
-public class StringSchema {
-    private boolean checkNull = false;
+public class StringSchema extends BaseSchema{
+    private boolean checkRequired = false;
     private boolean checkMinLength = false;
     private int minLength = 0;
     private boolean checkString = false;
     private String subString;
 
-    private boolean check;
-
     public StringSchema required() {
-        this.checkNull = true;
+        this.checkRequired = true;
         return this;
     }
 
@@ -29,21 +27,44 @@ public class StringSchema {
     }
 
     public boolean isValid(Object data) {
+        boolean bRet = true;
 
-        if (this.checkNull) {
-           // if ((data == null) || (data.toString().equals(""))) {
-               // return false;
-                return !((data == null) || (data.toString().equals("")));
-          //  }
+        if (this.checkRequired) {
+            bRet = !(super.isValid(data) || (data.equals(""))
+                    || !(data instanceof String));
+            /*
+            if ((data == null) || (data.equals(""))
+                    || !(data instanceof String)) {
+                bRet = false;
+            }
+
+             */
         }
+
         if (this.checkString) {
             String fullString = data.toString();
             int index = fullString.indexOf(this.subString);
-            return index != -1;
+            // return index != -1;
+            bRet = index != -1;
+            /*
+            if (index == -1) {
+                bRet = false;
+            }
+
+             */
         }
+
         if (this.checkMinLength) {
-            return data.toString().length() >= this.minLength;
+            assert data != null;
+            bRet = data.toString().length() >= this.minLength;
+            /*
+            if (data.toString().length() < this.minLength) {
+                bRet = false;
+            }
+
+             */
         }
-        return true;
+
+        return bRet;
     }
 }
