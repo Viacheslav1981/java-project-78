@@ -31,9 +31,10 @@ public class StringSchema {
     public boolean isValid(Object data) {
 
         if (this.checkNull) {
-            if ((data == null) || (data.toString().equals(""))) {
-                return false;
-            }
+           // if ((data == null) || (data.toString().equals(""))) {
+               // return false;
+                return !((data == null) || (data.toString().equals("")));
+          //  }
         }
         if (this.checkString) {
             String fullString = data.toString();
