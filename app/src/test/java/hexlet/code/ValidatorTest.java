@@ -14,6 +14,12 @@ public class ValidatorTest {
         StringSchema schema = v.string();
         boolean actual;
 
+        actual = schema.isValid("");
+        assertTrue(actual);
+
+        actual = schema.isValid(null);
+        assertTrue(actual);
+
         actual = schema.required().isValid("");
         assertFalse(actual);
 
@@ -22,8 +28,6 @@ public class ValidatorTest {
 
         actual = schema.contains("test").isValid("testing");
         assertTrue(actual);
-
-        actual = true;
 
 
        // schema.minLength(6).contains("we");

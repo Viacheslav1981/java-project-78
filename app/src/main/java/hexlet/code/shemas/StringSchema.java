@@ -7,6 +7,8 @@ public class StringSchema {
     private boolean checkString = false;
     private String subString;
 
+    private boolean check;
+
     public StringSchema required() {
         this.checkNull = true;
         return this;
@@ -29,13 +31,10 @@ public class StringSchema {
     public boolean isValid(Object data) {
 
         if (this.checkNull) {
-            if (data == null) {
+            if ((data == null) || (data.toString().equals(""))) {
                 return false;
-            } else {
-                return !data.toString().equals("");
             }
         }
-
         if (this.checkString) {
             String fullString = data.toString();
             int index = fullString.indexOf(this.subString);
@@ -44,8 +43,6 @@ public class StringSchema {
         if (this.checkMinLength) {
             return data.toString().length() >= this.minLength;
         }
-
         return true;
-
     }
 }
