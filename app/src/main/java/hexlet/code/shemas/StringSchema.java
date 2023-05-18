@@ -1,6 +1,6 @@
 package hexlet.code.shemas;
 
-public class StringSchema extends BaseSchema{
+public class StringSchema extends BaseSchema {
     private boolean checkRequired = false;
     private boolean checkMinLength = false;
     private int minLength = 0;
@@ -30,8 +30,11 @@ public class StringSchema extends BaseSchema{
         boolean bRet = true;
 
         if (this.checkRequired) {
-            bRet = !(super.isValid(data) || (data.equals(""))
-                    || !(data instanceof String));
+            if ((!super.isValid(data))
+                    || (data.equals(""))
+                    || !(data.getClass() == String.class)) {
+                return false;
+            }
         }
 
         if (this.checkString) {
@@ -42,7 +45,7 @@ public class StringSchema extends BaseSchema{
         }
 
         if (this.checkMinLength) {
-           // assert data != null;
+            // assert data != null;
             bRet = data.toString().length() >= this.minLength;
 
         }

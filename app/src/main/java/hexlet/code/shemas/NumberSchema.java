@@ -30,10 +30,19 @@ public class NumberSchema extends BaseSchema {
     public boolean isValid(Object data) {
 
         boolean bRet = true;
-
+        /*
         if ((this.checkRequired) && !(super.isValid(data)
                 && (data instanceof Integer))) {
                 return false;
+        }
+
+         */
+
+        if (this.checkRequired) {
+            if ((!super.isValid(data))
+                    || !(data.getClass() == Integer.class)) {
+                return false;
+            }
         }
 
         if (this.checkPositive) {
