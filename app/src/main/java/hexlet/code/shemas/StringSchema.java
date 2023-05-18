@@ -32,37 +32,19 @@ public class StringSchema extends BaseSchema{
         if (this.checkRequired) {
             bRet = !(super.isValid(data) || (data.equals(""))
                     || !(data instanceof String));
-            /*
-            if ((data == null) || (data.equals(""))
-                    || !(data instanceof String)) {
-                bRet = false;
-            }
-
-             */
         }
 
         if (this.checkString) {
             String fullString = data.toString();
             int index = fullString.indexOf(this.subString);
-            // return index != -1;
             bRet = index != -1;
-            /*
-            if (index == -1) {
-                bRet = false;
-            }
 
-             */
         }
 
         if (this.checkMinLength) {
             assert data != null;
             bRet = data.toString().length() >= this.minLength;
-            /*
-            if (data.toString().length() < this.minLength) {
-                bRet = false;
-            }
 
-             */
         }
 
         return bRet;
