@@ -56,23 +56,15 @@ public class MapSchema extends BaseSchema {
                 String key = entry.getKey();
                 Object value = entry.getValue();
 
-               if (this.validationMap.containsKey(key)) {
-                 BaseSchema checkShape =   this.validationMap.get(key);
-                  bRet =  checkShape.isValid(value);
-               }
-
-                System.out.println(key);
-                System.out.println(value);
+                if (this.validationMap.containsKey(key)) {
+                    BaseSchema checkShape = this.validationMap.get(key);
+                    bRet = checkShape.isValid(value);
+                    if (!bRet) {
+                        return false;
+                    }
+                }
             }
-
-
-
-            // for (Map.Entry<String, Object> elem : this.validationMap.entrySet()) {
-                // System.out.println(value.getClass().getName());
-               // System.out.println(value.isValid(value));
-
-            }
-      //  }
+        }
         return bRet;
     }
 

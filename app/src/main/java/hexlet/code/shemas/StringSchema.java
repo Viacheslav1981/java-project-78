@@ -37,14 +37,14 @@ public class StringSchema extends BaseSchema {
             }
         }
 
-        if (this.checkString) {
+        if (this.checkString && (super.isValid(data))) {
             String fullString = data.toString();
             int index = fullString.indexOf(this.subString);
             bRet = index != -1;
 
         }
 
-        if (this.checkMinLength) {
+        if (this.checkMinLength && (super.isValid(data))) {
             // assert data != null;
             bRet = data.toString().length() >= this.minLength;
 

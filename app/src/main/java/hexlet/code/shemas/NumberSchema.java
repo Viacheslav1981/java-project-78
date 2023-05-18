@@ -45,11 +45,11 @@ public class NumberSchema extends BaseSchema {
             }
         }
 
-        if (this.checkPositive) {
+        if (this.checkPositive && (super.isValid(data))) {
             bRet = (Integer) data > 0;
         }
 
-        if (this.checkRange) {
+        if (this.checkRange && (super.isValid(data))) {
             bRet =  ((Integer) data >= limit1 && (Integer) data <= limit2);
         }
 
