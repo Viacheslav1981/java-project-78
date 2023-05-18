@@ -32,12 +32,23 @@ public class NumberSchema extends BaseSchema {
         boolean bRet = true;
 
         if (this.checkRequired) {
+            if (!(super.isValid(data)
+                    && (data instanceof Integer))) {
+                return false;
+            }
+        }
+
+
+           /*
+            if (this.checkRequired) {
             bRet = ((super.isValid(data))
                     && (data instanceof Integer));
             if (!bRet) {
                 return false;
             }
         }
+
+            */
 
         if (this.checkPositive) {
             bRet = (Integer) data > 0;

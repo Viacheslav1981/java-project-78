@@ -42,7 +42,7 @@ public class StringSchema extends BaseSchema{
         }
 
         if (this.checkMinLength) {
-            assert data != null;
+           // assert data != null;
             bRet = data.toString().length() >= this.minLength;
 
         }
