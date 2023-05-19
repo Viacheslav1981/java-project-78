@@ -28,14 +28,24 @@ public class StringSchema extends BaseSchema {
 
     public boolean isValid(Object data) {
 
+        /*
         if ((checkRequired) && ((!super.isValid(data))
                 || (data.equals(""))
                 || !(data.getClass() == String.class))) {
                 return false;
             }
 
+         */
+
+        if (checkRequired) {
+            if (((!super.isValid(data))
+                    || (data.equals(""))
+                    || !(data.getClass() == String.class))) {
+                return false;
+            }
+        }
+
         if (checkString) {
-           // assert data != null;
             return data.toString().indexOf(subString) != 1;
         }
 
