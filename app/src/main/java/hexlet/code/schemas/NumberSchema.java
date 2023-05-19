@@ -32,17 +32,17 @@ public final class NumberSchema extends BaseSchema {
         boolean bRet = true;
 
         if (checkRequired) {
-            if ((!super.isNotNull(data))
+            if ((!super.isValid(data))
                     || !(data.getClass() == Integer.class)) {
                 return false;
             }
         }
 
-        if (checkPositive && (super.isNotNull(data))) {
+        if (checkPositive && (super.isValid(data))) {
             bRet = (Integer) data > 0;
         }
 
-        if (checkRange && (super.isNotNull(data))) {
+        if (checkRange && (super.isValid(data))) {
             bRet =  ((Integer) data >= limit1 && (Integer) data <= limit2);
         }
 

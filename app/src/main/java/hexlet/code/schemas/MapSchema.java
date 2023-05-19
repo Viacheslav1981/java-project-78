@@ -55,7 +55,7 @@ public final class MapSchema extends BaseSchema {
 
                 if (this.validationMap.containsKey(key)) {
                     BaseSchema checkShape = this.validationMap.get(key);
-                    bRet = checkShape.isNotNull(value);
+                    bRet = checkShape.isValid(value);
                     if (!bRet) {
                         return false;
                     }
