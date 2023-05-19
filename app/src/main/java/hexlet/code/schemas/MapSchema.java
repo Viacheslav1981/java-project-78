@@ -48,8 +48,8 @@ public class MapSchema extends BaseSchema {
             Map map = (Map) data;
 
             for (Object o : map.entrySet()) {
-                Map.Entry<String, Object> entry = (Map.Entry<String, Object>) o;
-                String key = entry.getKey();
+                Map.Entry<Object, Object> entry = (Map.Entry<Object, Object>) o;
+                Object key = entry.getKey();
                 Object value = entry.getValue();
 
                 if (this.validationMap.containsKey(key)) {
