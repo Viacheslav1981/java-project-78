@@ -34,11 +34,7 @@ public class MapSchema extends BaseSchema {
         boolean bRet = true;
 
         if (this.checkRequired) {
-            bRet = (data instanceof Map);
-        }
-
-        if (!bRet) {
-            return false;
+           return (data instanceof Map);
         }
 
         if (this.checkSize) {
