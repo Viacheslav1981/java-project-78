@@ -27,37 +27,20 @@ public class StringSchema extends BaseSchema {
     }
 
     public boolean isValid(Object data) {
-        // boolean bRet = true;
-        /*
-        if (this.checkRequired) {
-            if ((!super.isValid(data))
-                    || (data.equals(""))
-                    || !(data.getClass() == String.class)) {
-                return false;
-            }
-        }
 
-         */
-
-        if ((this.checkRequired) && ((!super.isValid(data))
+        if ((checkRequired) && ((!super.isValid(data))
                 || (data.equals(""))
                 || !(data.getClass() == String.class))) {
                 return false;
             }
 
-        if (this.checkString && (super.isValid(data))) {
-            String fullString = data.toString();
-            //  int index = fullString.indexOf(this.subString);
-            // bRet = index != -1;
-            //  return index != -1;
-            return fullString.indexOf(this.subString) != 1;
-
+        if (checkString) {
+           // assert data != null;
+            return data.toString().indexOf(subString) != 1;
         }
 
-        if (this.checkMinLength && (super.isValid(data))) {
-            // bRet = data.toString().length() >= this.minLength;
-            return data.toString().length() >= this.minLength;
-
+        if (checkMinLength) {
+            return data.toString().length() >= minLength;
         }
         return true;
     }
