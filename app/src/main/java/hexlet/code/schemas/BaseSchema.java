@@ -5,7 +5,7 @@ public abstract class BaseSchema {
 
 
    // @SuppressWarnings("Checkstyle")
-    public boolean isNotNull(Object data) {
+    public final boolean isNotNull(Object data) {
         return !(data == null);
     }
 
