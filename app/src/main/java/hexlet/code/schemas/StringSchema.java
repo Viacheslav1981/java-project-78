@@ -1,6 +1,6 @@
 package hexlet.code.schemas;
 
-public class StringSchema extends BaseSchema {
+public final class StringSchema extends BaseSchema {
     private boolean checkRequired = false;
     private boolean checkMinLength = false;
     private int minLength = 0;
