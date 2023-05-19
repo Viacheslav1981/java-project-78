@@ -19,10 +19,10 @@ public final class NumberSchema extends BaseSchema {
         return this;
     }
 
-    public NumberSchema range(int limit1, int limit2) {
+    public NumberSchema range(int range1, int range2) {
         this.checkRange = true;
-        this.limit1 = limit1;
-        this.limit2 = limit2;
+        this.limit1 = range1;
+        this.limit2 = range2;
 
         return this;
     }
