@@ -110,6 +110,11 @@ public class ValidatorTest {
         actual = schema.isValid(data);
         assertTrue(actual);
 
+        schema.sizeof(1);
+        actual = schema.isValid(data);
+        assertFalse(actual);
+
+
     }
 
     @Test

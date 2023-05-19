@@ -33,8 +33,15 @@ public class MapSchema extends BaseSchema {
     public boolean isValid(Object data) {
         boolean bRet = true;
 
+        /*
         if (this.checkRequired) {
            return (data instanceof Map);
+        }
+
+         */
+
+        if ((this.checkRequired) && (!(data instanceof Map))) {
+            return false;
         }
 
         if (this.checkSize) {
