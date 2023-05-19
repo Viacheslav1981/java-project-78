@@ -1,4 +1,4 @@
-package hexlet.code.shemas;
+package hexlet.code.schemas;
 
 public class StringSchema extends BaseSchema {
     private boolean checkRequired = false;
@@ -28,22 +28,12 @@ public class StringSchema extends BaseSchema {
 
     public boolean isValid(Object data) {
 
-        /*
         if ((checkRequired) && ((!super.isValid(data))
                 || (data.equals(""))
                 || !(data.getClass() == String.class))) {
-                return false;
-            }
-
-         */
-
-        if (checkRequired) {
-            if (((!super.isValid(data))
-                    || (data.equals(""))
-                    || !(data.getClass() == String.class))) {
-                return false;
-            }
+            return false;
         }
+
 
         if (checkString) {
             return data.toString().indexOf(subString) != 1;
