@@ -47,10 +47,6 @@ public class StringSchema extends BaseSchema {
             return false;
         }
 
-        if ((checkMinLength) && (!(data.toString().length() >= minLength))) {
-            return false;
-        }
-
-        return true;
+        return (!checkMinLength) || (data.toString().length() >= minLength);
     }
 }
