@@ -17,9 +17,9 @@ public final class MapSchema extends BaseSchema {
         return this;
     }
 
-    public MapSchema sizeof(int size) {
+    public MapSchema sizeof(int sizeof) {
         this.checkSize = true;
-        this.size = size;
+        this.size = sizeof;
         return this;
     }
 
