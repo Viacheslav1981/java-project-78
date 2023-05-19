@@ -28,8 +28,17 @@ public class BaseSchema {
     }
 
 
+    /*
     public boolean isValid(Object data) {
         return !(data == null);
     }
+
+     */
+
+    public final boolean isNotNull(Object data) {
+        return !(data == null);
+    }
+
+
 
 }
