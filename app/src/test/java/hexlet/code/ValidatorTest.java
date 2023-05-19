@@ -26,6 +26,7 @@ public class ValidatorTest {
         actual = schema.isValid(null);
         assertTrue(actual);
 
+
         actual = schema.minLength(6).isValid("3rerytytytyt");
         assertTrue(actual);
 
@@ -35,7 +36,7 @@ public class ValidatorTest {
         actual = schema.required().isValid("");
         assertFalse(actual);
 
-        actual = schema.required().isValid(5);
+        actual = schema.isValid(5);
         assertFalse(actual);
 
         actual = schema.minLength(6).isValid("3rerytytytyt");
@@ -44,7 +45,11 @@ public class ValidatorTest {
         actual = schema.contains("test").isValid("testing");
         assertTrue(actual);
 
-        actual = schema.minLength(6).contains("test").isValid("testing");
+        actual = schema.minLength(10).contains("test").isValid("testing");
+        assertFalse(actual);
+
+        schema = v.string().required().minLength(5).contains("test");
+        actual = schema.isValid("testing");
         assertTrue(actual);
 
     }
