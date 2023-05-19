@@ -27,8 +27,8 @@ public class StringSchema extends BaseSchema {
     }
 
     public boolean isValid(Object data) {
-        boolean bRet = true;
-
+        // boolean bRet = true;
+        /*
         if (this.checkRequired) {
             if ((!super.isValid(data))
                     || (data.equals(""))
@@ -37,19 +37,28 @@ public class StringSchema extends BaseSchema {
             }
         }
 
+         */
+
+        if ((this.checkRequired) && ((!super.isValid(data))
+                || (data.equals(""))
+                || !(data.getClass() == String.class))) {
+                return false;
+            }
+
         if (this.checkString && (super.isValid(data))) {
             String fullString = data.toString();
-            int index = fullString.indexOf(this.subString);
-            bRet = index != -1;
+            //  int index = fullString.indexOf(this.subString);
+            // bRet = index != -1;
+            //  return index != -1;
+            return fullString.indexOf(this.subString) != 1;
 
         }
 
         if (this.checkMinLength && (super.isValid(data))) {
-            // assert data != null;
-            bRet = data.toString().length() >= this.minLength;
+            // bRet = data.toString().length() >= this.minLength;
+            return data.toString().length() >= this.minLength;
 
         }
-
-        return bRet;
+        return true;
     }
 }
