@@ -8,7 +8,7 @@ public class MapSchema extends BaseSchema {
     private boolean checkRequired = false;
     private boolean checkSize = false;
     private boolean checkShape = false;
-    private Map<String, BaseSchema> validationMap = new HashMap<>();
+    private Map<Object, BaseSchema> validationMap = new HashMap<>();
 
     private int size;
 

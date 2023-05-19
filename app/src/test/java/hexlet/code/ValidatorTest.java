@@ -129,7 +129,7 @@ public class ValidatorTest {
         actual = schema.isValid(human1);
         assertTrue(actual);
 
-        Map<String, Object> human2 = new HashMap<>();
+        Map<Object, Object> human2 = new HashMap<>();
         human2.put("name", "Maya");
         human2.put("age", null);
         actual = schema.isValid(human2);

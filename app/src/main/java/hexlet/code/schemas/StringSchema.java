@@ -34,15 +34,6 @@ public class StringSchema extends BaseSchema {
             return false;
         }
 
-        /*
-        if (checkString) {
-            if (!data.toString().contains(subString)) {
-                return false;
-            }
-        }
-
-         */
-
         if ((checkString) && (!data.toString().contains(subString))) {
             return false;
         }

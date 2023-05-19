@@ -31,18 +31,18 @@ public class NumberSchema extends BaseSchema {
 
         boolean bRet = true;
 
-        if (this.checkRequired) {
+        if (checkRequired) {
             if ((!super.isValid(data))
                     || !(data.getClass() == Integer.class)) {
                 return false;
             }
         }
 
-        if (this.checkPositive && (super.isValid(data))) {
+        if (checkPositive && (super.isValid(data))) {
             bRet = (Integer) data > 0;
         }
 
-        if (this.checkRange && (super.isValid(data))) {
+        if (checkRange && (super.isValid(data))) {
             bRet =  ((Integer) data >= limit1 && (Integer) data <= limit2);
         }
 
