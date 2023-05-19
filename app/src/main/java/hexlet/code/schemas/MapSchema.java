@@ -23,9 +23,9 @@ public final class MapSchema extends BaseSchema {
         return this;
     }
 
-    public MapSchema shape(Map validationMap) {
+    public MapSchema shape(Map validationMapTo) {
         this.checkShape = true;
-        this.validationMap = validationMap;
+        this.validationMap = validationMapTo;
 
         return this;
     }
@@ -40,8 +40,8 @@ public final class MapSchema extends BaseSchema {
 
         if (this.checkSize) {
             Map map = (Map) data;
-            int size = map.size();
-            bRet = size == this.size;
+            int sizeOfMap = map.size();
+            bRet = sizeOfMap == this.size;
 
         }
 
@@ -54,8 +54,8 @@ public final class MapSchema extends BaseSchema {
                 Object value = entry.getValue();
 
                 if (this.validationMap.containsKey(key)) {
-                    BaseSchema checkShape = this.validationMap.get(key);
-                    bRet = checkShape.isValid(value);
+                    BaseSchema shape = this.validationMap.get(key);
+                    bRet = shape.isValid(value);
                     if (!bRet) {
                         return false;
                     }
