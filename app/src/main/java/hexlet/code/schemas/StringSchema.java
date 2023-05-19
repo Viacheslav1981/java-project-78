@@ -34,10 +34,15 @@ public class StringSchema extends BaseSchema {
             return false;
         }
 
-        if ((checkString) && (!data.toString().contains(subString))) {
+        if ((checkString) && (super.isValid(data)) && (!data.toString().contains(subString))) {
             return false;
         }
 
-        return (!checkMinLength) || (data.toString().length() >= minLength);
+        if ((checkMinLength) && (super.isValid(data)) && (!(data.toString().length() >= minLength))) {
+            return false;
+        }
+
+        return true;
+
     }
 }

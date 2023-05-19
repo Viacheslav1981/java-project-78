@@ -119,7 +119,7 @@ public class ValidatorTest {
         Map<String, BaseSchema> schemas = new HashMap<>();
         boolean actual;
 
-        schemas.put("name", v.string().required());
+        schemas.put("name", v.string().minLength(4));
         schemas.put("age", v.number().positive());
         schema.shape(schemas);
 
@@ -145,6 +145,12 @@ public class ValidatorTest {
         human4.put("name", "Valya");
         human4.put("age", -5);
         actual = schema.isValid(human4);
+        assertFalse(actual);
+
+        Map<String, Object> human5 = new HashMap<>();
+        human5.put("name", "xxx");
+        human5.put("age", 5);
+        actual = schema.isValid(human5);
         assertFalse(actual);
 
     }
