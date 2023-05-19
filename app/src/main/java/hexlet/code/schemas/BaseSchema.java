@@ -29,6 +29,7 @@ public class BaseSchema {
 
 
 
+    @SuppressWarnings("CheckStyle")
     public boolean isValid(Object data) {
         return !(data == null);
     }
