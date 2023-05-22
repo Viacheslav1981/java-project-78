@@ -29,7 +29,7 @@ public final class StringSchema extends BaseSchema {
     public boolean isValid(Object data) {
 
 
-        if ((checkRequired) && ((!super.isNotNull(data))
+        if ((checkRequired) && ((super.isNotNull(data))
                 || (data.equals("")))) {
             return false;
         }
