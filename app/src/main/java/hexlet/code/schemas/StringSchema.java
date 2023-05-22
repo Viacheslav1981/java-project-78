@@ -30,14 +30,15 @@ public final class StringSchema extends BaseSchema {
 
 
         if ((checkRequired) && ((!super.isNotNull(data))
-                || (data.equals(""))))
-                 {
+                || (data.equals("")))) {
             return false;
         }
 
         //|| !(data.getClass() == String.class)))
 
-        if ((checkString) && (super.isNotNull(data))
+        //&& (super.isNotNull(data))
+
+        if ((checkString)
                 && (!data.toString().contains(subString))) {
             return false;
         }
