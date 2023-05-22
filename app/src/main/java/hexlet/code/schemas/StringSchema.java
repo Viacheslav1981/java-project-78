@@ -28,17 +28,21 @@ public final class StringSchema extends BaseSchema {
 
     public boolean isValid(Object data) {
 
+
         if ((checkRequired) && ((!super.isNotNull(data))
-                || (data.equals(""))
-                || !(data.getClass() == String.class))) {
+                || (data.equals(""))))
+                 {
             return false;
         }
 
-        if ((checkString) && (super.isNotNull(data)) && (!data.toString().contains(subString))) {
+        //|| !(data.getClass() == String.class)))
+
+        if ((checkString) && (super.isNotNull(data))
+                && (!data.toString().contains(subString))) {
             return false;
         }
 
-        return (!checkMinLength) || (!super.isNotNull(data)) || (data.toString().length() >= minLength);
-
+        return (!checkMinLength) || (!super.isNotNull(data))
+                || (data.toString().length() >= minLength);
     }
 }
