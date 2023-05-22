@@ -43,7 +43,9 @@ public final class StringSchema extends BaseSchema {
             return false;
         }
 
-        return (!checkMinLength) || (!super.isNotNull(data))
+        //|| (!super.isNotNull(data))
+
+        return (!checkMinLength)
                 || (data.toString().length() >= minLength);
     }
 }
