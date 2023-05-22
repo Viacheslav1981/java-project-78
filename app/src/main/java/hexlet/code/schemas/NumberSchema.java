@@ -31,22 +31,23 @@ public final class NumberSchema extends BaseSchema {
 
         boolean bRet = true;
 
-        if (checkRequired) {
-            if ((super.isNotNull(data))
-                    || !(data.getClass() == Integer.class)) {
-                return false;
-            }
+        if ((checkRequired) && ((super.isNotNull(data))
+                || !(data.getClass() == Integer.class))) {
+
+            return false;
         }
 
         if (checkPositive && (!super.isNotNull(data))) {
             bRet = (Integer) data > 0;
         }
 
+
         if (checkRange && (!super.isNotNull(data))) {
-            bRet =  ((Integer) data >= limit1 && (Integer) data <= limit2);
+            bRet = ((Integer) data >= limit1 && (Integer) data <= limit2);
         }
 
         return bRet;
+
     }
 
 
