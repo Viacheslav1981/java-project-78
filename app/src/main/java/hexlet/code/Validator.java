@@ -13,11 +13,11 @@ public final class Validator {
         NumberSchema schema = v.number();
 
        // schema.isValid2(""); // true
-        schema.isValid2(null); // true
+    //    schema.isValid2(null); // true
 
         schema.required();
 
-        schema.isValid2(null); // false
+     //   schema.isValid2(null); // false
 
 
         /*
