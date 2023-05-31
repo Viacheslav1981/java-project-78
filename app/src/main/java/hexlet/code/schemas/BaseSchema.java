@@ -16,7 +16,7 @@ public abstract class BaseSchema {
 
   //  public abstract boolean isValid(Object data);
 
-    public final boolean isValid2(Object data) {
+    public final boolean isValid(Object data) {
 
         boolean isValidOk = true;
 
