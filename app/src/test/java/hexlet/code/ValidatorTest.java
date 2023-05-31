@@ -4,7 +4,6 @@ import hexlet.code.schemas.BaseSchema;
 import hexlet.code.schemas.MapSchema;
 import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -17,14 +16,39 @@ public class ValidatorTest {
 
 
 
+    /*
     @BeforeEach
     public void initEach(){
         //test setup code
         BaseSchema.allChecks.clear();
     }
 
+     */
 
 
+
+    /*
+    @Test
+    public void testVal() {
+        Validator v = new Validator();
+        StringSchema schema = v.string();
+        boolean actual;
+
+        actual = schema.isValidTest("");
+        assertTrue(actual);
+
+        actual = schema.isValidTest(null);
+
+
+        actual = schema.required().minLength(6).contains("rer").isValidTest("3rerytytytyt");
+        assertTrue(actual);
+
+      //  actual = schema.minLength(6).isValidTest("3re");
+      //  assertFalse(actual);
+
+    }
+
+     */
 
     @Test
     public void testValidStringSchema() {
@@ -70,19 +94,74 @@ public class ValidatorTest {
     }
 
     @Test
-    public void testValidNumberSchema() {
+    public void testNumberValidator() {
         Validator v = new Validator();
         NumberSchema schema = v.number();
         boolean actual;
 
-        actual = schema.range(5, 10).isValid(5);
+        actual = schema.isValid(5);
         assertTrue(actual);
+        actual = schema.isValid(null);
+        assertTrue(actual);
+
+        actual = schema.positive().isValid(null);
+        assertTrue(actual);
+
+        schema.required();
+        actual = schema.isValid(null);
+        assertFalse(actual);
+        actual = schema.isValid("5");
+        assertFalse(actual);
+
+        actual = schema.isValid(-10);
+        assertFalse(actual);
+
+        actual = schema.isValid(-0);
+        assertFalse(actual);
+        actual = schema.isValid(10);
+        assertTrue(actual);
+
+        schema.range(5, 10);
+        actual = schema.isValid(5);
+        assertTrue(actual);
+        actual = schema.isValid(10);
+        assertTrue(actual);
+        actual = schema.isValid(4);
+        assertFalse(actual);
+        actual = schema.isValid(11);
+        assertFalse(actual);
+
+        schema.range(6, 9);
+        actual = schema.isValid(5);
+        assertFalse(actual);
+        actual = schema.isValid(10);
+        assertFalse(actual);
+    }
+
+    @Test
+    public void testValidNumberSchema() {
+        Validator v = new Validator();
+        NumberSchema schema = v.number();
+        boolean actual;
 
         actual = schema.isValid(null);
         assertTrue(actual);
 
         actual = schema.positive().isValid(null);
         assertTrue(actual);
+
+        schema.required();
+
+        actual = schema.isValid(null);
+        assertFalse(actual);
+
+        actual = schema.isValid("5");
+        assertFalse(actual);
+
+        actual = schema.isValid(-10);
+        assertFalse(actual);
+
+
 
      //   actual = schema.isValid("5");
      //   assertTrue(actual);
@@ -102,8 +181,8 @@ public class ValidatorTest {
         actual = schema.positive().isValid(-10);
         assertFalse(actual);
 
-        actual = schema.isValid(10);
-        assertTrue(actual);
+        actual = schema.isValid(0);
+        assertFalse(actual);
 
         actual = schema.isValid("5");
         assertFalse(actual);

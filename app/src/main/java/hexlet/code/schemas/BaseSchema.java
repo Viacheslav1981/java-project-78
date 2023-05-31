@@ -2,16 +2,48 @@ package hexlet.code.schemas;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public abstract class BaseSchema {
 
     public static final List<Object> allChecks = new ArrayList<>();
+    public static final Map<String, Check> checks = new HashMap<>();
 
 
     public final boolean isNotNull(Object data) {
         return data == null;
+    }
+
+    public final boolean isValidTest(Object data) {
+
+        if (data instanceof String) {
+            int n = checks.size();
+
+            System.out.println(n);
+
+            for (Map.Entry<String, Check> checking : checks.entrySet()) {
+                if(checking.getKey().equals("string")) {
+                    Check check = checking.getValue();
+                  //  Check check = (Check) checks.get(i);
+
+                    if(!check.check(data)){
+                        return false;
+                    }
+
+                }
+
+                return true;
+            }
+
+        }
+
+
+
+        return true;
+
+
     }
 
   //  public abstract boolean isValid(Object data);
@@ -52,16 +84,12 @@ public abstract class BaseSchema {
 
         //список всех проверок... из массива?
 
-        for (Object allCheck : allChecks) {
-            //System.out.println(allChecks.get(i));
-            Check check = (Check) allCheck;
-            System.out.println(check);
-        }
+
 
         for (int i = 0; i < allChecks.size(); i++) {
             Check check = (Check) allChecks.get(i);
 
-            Object o = allChecks.get(i).getClass();
+           // Object o = allChecks.get(i).getClass();
 
             isValidOk = check.check(data);
             if (!check.check(data)) {
@@ -72,6 +100,11 @@ public abstract class BaseSchema {
 
           // allChecks.clear();
         return true;
+
+    }
+
+    public static void addChecks(String schema, Check check) {
+        checks.put(schema, check);
 
     }
 

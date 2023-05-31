@@ -6,9 +6,11 @@ public final class StringSchema extends BaseSchema {
     private int minLength = 0;
   //  private boolean checkString = false;
   //  private String subString;
+    public String stringSchema = "string";
 
     public StringSchema required() {
       //  this.checkRequired = true;
+        addChecks(stringSchema, it -> it instanceof String && it != "" );
 
         addCheck(it -> it instanceof String && it != "");
 
@@ -18,6 +20,8 @@ public final class StringSchema extends BaseSchema {
     public StringSchema minLength(int length) {
      //   this.checkMinLength = true;
         this.minLength = length;
+
+        addChecks(stringSchema, it -> it instanceof String s && s.length() >= minLength);
 
         addCheck(it -> it instanceof String s && s.length() >= minLength);
 
@@ -29,6 +33,9 @@ public final class StringSchema extends BaseSchema {
      //   this.subString = str;
         Check check;
         check = it -> it instanceof String s && s.contains(str);
+
+        addChecks(stringSchema, check);
+
 
         addCheck(check);
 
