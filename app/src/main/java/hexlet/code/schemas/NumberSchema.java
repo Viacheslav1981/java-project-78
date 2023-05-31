@@ -11,11 +11,17 @@ public final class NumberSchema extends BaseSchema {
 
     public NumberSchema required() {
         this.checkRequired = true;
+
+        addCheck(it -> it instanceof Integer);
         return this;
     }
 
     public NumberSchema positive() {
         this.checkPositive = true;
+
+        addCheck(it -> it instanceof Integer i && i > 0 || it == null);
+      //  addCheck(it -> (Integer) it > 0);
+
         return this;
     }
 
@@ -24,8 +30,12 @@ public final class NumberSchema extends BaseSchema {
         this.limit1 = range1;
         this.limit2 = range2;
 
+        addCheck(it -> it instanceof Integer i && i >= limit1
+                && i <= limit2);
+
         return this;
     }
+    /*
 
     public boolean isValid(Object data) {
 
@@ -49,6 +59,8 @@ public final class NumberSchema extends BaseSchema {
         return bRet;
 
     }
+
+     */
 
 
 }

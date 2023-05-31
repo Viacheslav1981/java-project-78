@@ -8,27 +8,34 @@ public final class MapSchema extends BaseSchema {
     private boolean checkRequired = false;
     private boolean checkSize = false;
     private boolean checkShape = false;
-    private Map<Object, BaseSchema> validationMap = new HashMap<>();
+    public static Map<String, BaseSchema> validationMap = new HashMap<>();
 
     private int size;
 
     public MapSchema required() {
         this.checkRequired = true;
+
+        addCheck(it -> it instanceof Map<?,?>);
         return this;
     }
 
     public MapSchema sizeof(int sizeof) {
         this.checkSize = true;
         this.size = sizeof;
+
+        addCheck(it -> it instanceof Map<?,?> map && map.size() == size);
         return this;
     }
 
-    public MapSchema shape(Map validationMapTo) {
+    public MapSchema shape(Map <String, BaseSchema> validationMapTo) {
         this.checkShape = true;
-        this.validationMap = validationMapTo;
+        validationMap = validationMapTo;
+
+
 
         return this;
     }
+    /*
 
     public boolean isValid(Object data) {
         boolean bRet = true;
@@ -64,6 +71,8 @@ public final class MapSchema extends BaseSchema {
         }
         return bRet;
     }
+
+     */
 
 
 }
