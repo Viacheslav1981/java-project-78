@@ -15,11 +15,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ValidatorTest {
 
+
+
     @BeforeEach
     public void initEach(){
         //test setup code
         BaseSchema.allChecks.clear();
     }
+
+
+
 
     @Test
     public void testValidStringSchema() {
@@ -70,7 +75,22 @@ public class ValidatorTest {
         NumberSchema schema = v.number();
         boolean actual;
 
+        actual = schema.range(5, 10).isValid(5);
+        assertTrue(actual);
+
         actual = schema.isValid(null);
+        assertTrue(actual);
+
+        actual = schema.positive().isValid(null);
+        assertTrue(actual);
+
+     //   actual = schema.isValid("5");
+     //   assertTrue(actual);
+
+        actual = schema.positive().isValid(-10);
+        assertFalse(actual);
+
+        actual = v.number().positive().isValid(10);
         assertTrue(actual);
 
         actual = schema.required().isValid(5);
@@ -145,6 +165,7 @@ public class ValidatorTest {
         Map<String, Object> human1 = new HashMap<>();
         human1.put("name", "Kolya");
         human1.put("age", 100);
+
         actual = schema.isValid(human1);
         assertTrue(actual);
 

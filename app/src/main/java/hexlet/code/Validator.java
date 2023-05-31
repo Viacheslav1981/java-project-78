@@ -50,14 +50,17 @@ public final class Validator {
     }
 
     public StringSchema string() {
+      //  BaseSchema.allChecks.clear();
         return new StringSchema();
     }
 
     public NumberSchema number() {
+     //   BaseSchema.allChecks.clear();
         return new NumberSchema();
     }
 
     public MapSchema map() {
+      //  BaseSchema.allChecks.clear();
         return new MapSchema();
     }
 }

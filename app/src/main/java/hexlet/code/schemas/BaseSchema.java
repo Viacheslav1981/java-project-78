@@ -52,8 +52,17 @@ public abstract class BaseSchema {
 
         //список всех проверок... из массива?
 
+        for (Object allCheck : allChecks) {
+            //System.out.println(allChecks.get(i));
+            Check check = (Check) allCheck;
+            System.out.println(check);
+        }
+
         for (int i = 0; i < allChecks.size(); i++) {
             Check check = (Check) allChecks.get(i);
+
+            Object o = allChecks.get(i).getClass();
+
             isValidOk = check.check(data);
             if (!check.check(data)) {
               //  allChecks.clear();

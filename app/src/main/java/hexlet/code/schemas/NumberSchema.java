@@ -31,7 +31,7 @@ public final class NumberSchema extends BaseSchema {
         this.limit2 = range2;
 
         addCheck(it -> it instanceof Integer i && i >= limit1
-                && i <= limit2);
+                && i <= limit2 || it == null);
 
         return this;
     }
