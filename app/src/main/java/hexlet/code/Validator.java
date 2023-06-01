@@ -50,6 +50,10 @@ public final class Validator {
        // schema.contains("tes").isValid2("testing");
     }
 
+    public Validator() {
+        BaseSchema.checks.clear();
+    }
+
     public StringSchema string() {
       //  BaseSchema.allChecks.clear();
         return new StringSchema();
@@ -61,7 +65,7 @@ public final class Validator {
     }
 
     public MapSchema map() {
-        BaseSchema.allChecks.clear();
+     //   BaseSchema.allChecks.clear();
         return new MapSchema();
     }
 }

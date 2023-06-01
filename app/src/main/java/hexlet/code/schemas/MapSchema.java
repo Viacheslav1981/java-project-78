@@ -12,8 +12,17 @@ public final class MapSchema extends BaseSchema {
 
     private int size;
 
+    public static String schema = "MapSchema";
+
+    public MapSchema() {
+        super(schema);
+       // allChecks.clear();
+    }
+
     public MapSchema required() {
         this.checkRequired = true;
+
+        addChecks("requiredMap", it -> it instanceof Map<?,?>);
 
         addCheck(it -> it instanceof Map<?,?>);
         return this;
@@ -22,6 +31,8 @@ public final class MapSchema extends BaseSchema {
     public MapSchema sizeof(int sizeof) {
         this.checkSize = true;
         this.size = sizeof;
+
+        addChecks("sizeof", it -> it instanceof Map<?,?> map && map.size() == size);
 
         addCheck(it -> it instanceof Map<?,?> map && map.size() == size);
         return this;

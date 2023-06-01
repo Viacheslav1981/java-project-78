@@ -9,8 +9,19 @@ public final class NumberSchema extends BaseSchema {
     private int limit1;
     private int limit2;
 
+    public static String schema = "NumberSchema";
+
+    public NumberSchema() {
+        super(schema);
+    }
+
+
+
     public NumberSchema required() {
         this.checkRequired = true;
+
+        addChecks("requiredNumber", it -> it instanceof Integer );
+
 
         addCheck(it -> it instanceof Integer);
         return this;
@@ -18,6 +29,8 @@ public final class NumberSchema extends BaseSchema {
 
     public NumberSchema positive() {
         this.checkPositive = true;
+
+        addChecks("positive", it -> it instanceof Integer i && i > 0 || it == null );
 
         addCheck(it -> it instanceof Integer i && i > 0 || it == null);
       //  addCheck(it -> (Integer) it > 0);
@@ -29,6 +42,9 @@ public final class NumberSchema extends BaseSchema {
         this.checkRange = true;
         this.limit1 = range1;
         this.limit2 = range2;
+
+        addChecks("range", it -> it instanceof Integer i && i >= limit1
+                && i <= limit2 || it == null);
 
         addCheck(it -> it instanceof Integer i && i >= limit1
                 && i <= limit2 || it == null);
