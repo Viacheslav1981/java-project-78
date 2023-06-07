@@ -5,9 +5,9 @@ import java.util.Map;
 
 public final class MapSchema extends BaseSchema {
 
-    private boolean checkRequired = false;
-    private boolean checkSize = false;
-    private boolean checkShape = false;
+  //  private boolean checkRequired = false;
+  //  private boolean checkSize = false;
+  //  private boolean checkShape = false;
     public static Map<String, BaseSchema> validationMap = new HashMap<>();
 
     private int size;
@@ -16,11 +16,10 @@ public final class MapSchema extends BaseSchema {
 
     public MapSchema() {
         super(schema);
-       // allChecks.clear();
     }
 
     public MapSchema required() {
-        this.checkRequired = true;
+       // this.checkRequired = true;
 
         addChecks("requiredMap", it -> it instanceof Map<?,?>);
 
@@ -29,7 +28,7 @@ public final class MapSchema extends BaseSchema {
     }
 
     public MapSchema sizeof(int sizeof) {
-        this.checkSize = true;
+      //  this.checkSize = true;
         this.size = sizeof;
 
         addChecks("sizeof", it -> it instanceof Map<?,?> map && map.size() == size);
@@ -39,10 +38,8 @@ public final class MapSchema extends BaseSchema {
     }
 
     public MapSchema shape(Map <String, BaseSchema> validationMapTo) {
-        this.checkShape = true;
+       // this.checkShape = true;
         validationMap = validationMapTo;
-
-
 
         return this;
     }

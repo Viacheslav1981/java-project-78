@@ -56,6 +56,7 @@ public final class Validator {
 
     public StringSchema string() {
       //  BaseSchema.allChecks.clear();
+
         return new StringSchema();
     }
 

@@ -6,17 +6,14 @@ import java.util.*;
 public abstract class BaseSchema {
 
     public String schema;
+    // public Object schema;
 
     public static final List<Object> allChecks = new ArrayList<>();
     public static final Map<String, Check> checks = new HashMap<>();
 
-    public final boolean isNotNull(Object data) {
-        return data == null;
-    }
 
-    public BaseSchema(String schema) {
-        this.schema = schema;
-
+    public BaseSchema(Object schema) {
+        this.schema = (String) schema;
     }
 
     public boolean checking(Object data, String nameCheck) {
@@ -27,15 +24,37 @@ public abstract class BaseSchema {
         return true;
     }
 
-    // public final boolean isValid(Object object) {return checks.values().stream().allMatch(check -> check.test(object));}
+    public boolean isValidOfSchema(BaseSchema schema, Object value) {
+
+        if (schema instanceof StringSchema) {
+            if ((!checking(value, "requiredString")
+                    || !checking(value, "minLength")
+                    || !checking(value, "contains"))) {
+                return false;
+            }
+
+        }
+        if (schema instanceof NumberSchema) {
+            if ((!checking(value, "requiredNumber")
+                    || !checking(value, "positive")
+                    || !checking(value, "range"))) {
+                return false;
+            }
+        }
+        if (schema instanceof MapSchema) {
+            return checking(value, "requiredMap")
+                    && checking(value, "sizeof");
+        }
+
+        return true;
+    }
 
     public final boolean isValid(Object data) {
-
 
         Map<String, BaseSchema> shapeMap = MapSchema.validationMap;
         int sizeOfShapeMap = shapeMap.size();
 
-        int j = 0;
+        boolean retOfValid = true;
 
         if (data instanceof Map<?, ?> && sizeOfShapeMap > 0) {
             for (Map.Entry<?, ?> entry : ((Map<?, ?>) data).entrySet()) {
@@ -43,70 +62,23 @@ public abstract class BaseSchema {
                 Object key = entry.getKey();
                 Object value = entry.getValue();
 
-
                 if (shapeMap.containsKey(key)) {
                     BaseSchema shape = shapeMap.get(key);
-                    if (shape instanceof StringSchema) {
-                        if ((!checking(value, "requiredString")
-                                || !checking(value, "minLength")
-                                || !checking(value, "contains"))) {
-                            return false;
-                        }
+                    retOfValid = isValidOfSchema(shape, value);
 
-                    }
-                    if (shape instanceof NumberSchema) {
-                        if ((!checking(value, "requiredNumber")
-                                || !checking(value, "positive")
-                                || !checking(value, "range"))) {
-                            return false;
-                        }
-                    }
-                    if (shape instanceof MapSchema) {
-                        if ((!checking(value, "requiredMap")
-                                || !checking(value, "sizeof")
-                        )) {
-                            return false;
-                        }
+                    if (!retOfValid) {
+                        return false;
                     }
 
-
                 }
-            }
-
-             //   return true;
 
             }
 
-            // System.out.println(schema);
-          //  boolean ret = true;
-
-            if (schema.equals("StringSchema")) {
-                if ((!checking(data, "requiredString")
-                        || !checking(data, "minLength")
-                        || !checking(data, "contains"))) {
-                    return false;
-                }
-            }
-            if (schema.equals("NumberSchema")) {
-                if ((!checking(data, "requiredNumber")
-                        || !checking(data, "positive")
-                        || !checking(data, "range"))) {
-                    return false;
-                }
-            }
-
-            if (schema.equals("MapSchema")) {
-                if ((!checking(data, "requiredMap")
-                        || !checking(data, "sizeof")
-                )) {
-                    return false;
-                }
-            }
-
-        return true;
+        } else {
+            retOfValid = isValidOfSchema(this, data);
+        }
+        return retOfValid;
     }
-
-    //  public abstract boolean isValid(Object data);
 
     public final boolean isValidd(Object data) {
 
@@ -147,8 +119,8 @@ public abstract class BaseSchema {
         // allChecks.stream().filter(data.getClass())
 
 
-        for (int i = 0; i < allChecks.size(); i++) {
-            Check check = (Check) allChecks.get(i);
+        for (Object allCheck : allChecks) {
+            Check check = (Check) allCheck;
 
             // Object o = allChecks.get(i).getClass();
 

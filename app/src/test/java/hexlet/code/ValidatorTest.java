@@ -15,22 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ValidatorTest {
 
 
-
-    /*
-
-    @BeforeEach
-    public void initEach(){
-        //test setup code
-        BaseSchema.allChecks.clear();
-    }
-
-     */
-
-
-
-
-
-
     @Test
     public void testVal() {
         Validator v = new Validator();

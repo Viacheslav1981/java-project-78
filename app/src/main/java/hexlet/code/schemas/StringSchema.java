@@ -8,9 +8,10 @@ public final class StringSchema extends BaseSchema {
   //  private String subString;
     // public String nameCheck = "string";
     public static String schema = "StringSchema";
+    public static StringSchema stringSchema;
 
     public StringSchema() {
-        super(schema);
+        super(stringSchema);
     }
 
     public StringSchema required() {
