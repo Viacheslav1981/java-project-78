@@ -9,25 +9,25 @@ import java.util.Map;
 public abstract class BaseSchema {
 
 
-    // public String schema;
-    //private String schema;
-     private Object schema;
-
     public static final List<Object> ALL_CHECKS = new ArrayList<>();
     public static final Map<String, Check> CHECKS = new HashMap<>();
 
 
+    /*
     public BaseSchema(Object schema) {
-       // this.schema = (String) schema;
+        // this.schema = (String) schema;
         this.schema = schema;
     }
 
-    public Object getSchema() {
-        return schema;
+     */
+
+    public BaseSchema() {
     }
+
 
     public void setSchema(Object schema) {
-        this.schema = schema;
+        // public String schema;
+        //private String schema;
     }
 
     private static boolean checking(Object data, String nameCheck) {

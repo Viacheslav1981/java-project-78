@@ -9,10 +9,13 @@ public final class NumberSchema extends BaseSchema {
     private int limit1;
     private int limit2;
 
-    public static String schema = "NumberSchema";
+   // public static String schema = "NumberSchema";
+    public static NumberSchema numberSchema;
+
 
     public NumberSchema() {
-        super(schema);
+       // super(numberSchema);
+        super.setSchema(numberSchema);
     }
 
 

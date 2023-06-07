@@ -11,7 +11,8 @@ public final class StringSchema extends BaseSchema {
     public static StringSchema stringSchema;
 
     public StringSchema() {
-        super(stringSchema);
+       // super(stringSchema);
+        super.setSchema(stringSchema);
     }
 
     public StringSchema required() {

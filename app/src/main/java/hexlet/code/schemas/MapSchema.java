@@ -13,9 +13,12 @@ public final class MapSchema extends BaseSchema {
     private int size;
 
     public static String schema = "MapSchema";
+    public static MapSchema mapSchema;
+
 
     public MapSchema() {
-        super(schema);
+       // super(schema);
+        super.setSchema(mapSchema);
     }
 
     public MapSchema required() {
