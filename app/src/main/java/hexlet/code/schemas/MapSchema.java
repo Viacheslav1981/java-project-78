@@ -5,43 +5,41 @@ import java.util.Map;
 
 public final class MapSchema extends BaseSchema {
 
-  //  private boolean checkRequired = false;
-  //  private boolean checkSize = false;
-  //  private boolean checkShape = false;
-    public static Map<String, BaseSchema> validationMap = new HashMap<>();
+    public static Map<String, BaseSchema> getValidationMap() {
+        return validationMap;
+    }
+
+
+    private static Map<String, BaseSchema> validationMap = new HashMap<>();
 
     private int size;
 
-    public static String schema = "MapSchema";
-    public static MapSchema mapSchema;
-
 
     public MapSchema() {
-       // super(schema);
-        super.setSchema(mapSchema);
+        super.setSchema();
     }
 
     public MapSchema required() {
-       // this.checkRequired = true;
+        // this.checkRequired = true;
 
-        addChecks("requiredMap", it -> it instanceof Map<?,?>);
+        addChecks("requiredMap", it -> it instanceof Map<?, ?>);
 
-        addCheck(it -> it instanceof Map<?,?>);
+        addCheck(it -> it instanceof Map<?, ?>);
         return this;
     }
 
     public MapSchema sizeof(int sizeof) {
-      //  this.checkSize = true;
+        //  this.checkSize = true;
         this.size = sizeof;
 
-        addChecks("sizeof", it -> it instanceof Map<?,?> map && map.size() == size);
+        addChecks("sizeof", it -> it instanceof Map<?, ?> map && map.size() == size);
 
-        addCheck(it -> it instanceof Map<?,?> map && map.size() == size);
+        addCheck(it -> it instanceof Map<?, ?> map && map.size() == size);
         return this;
     }
 
-    public MapSchema shape(Map <String, BaseSchema> validationMapTo) {
-       // this.checkShape = true;
+    public MapSchema shape(Map<String, BaseSchema> validationMapTo) {
+        // this.checkShape = true;
         validationMap = validationMapTo;
 
         return this;

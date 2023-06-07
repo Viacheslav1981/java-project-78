@@ -15,7 +15,7 @@ public final class NumberSchema extends BaseSchema {
 
     public NumberSchema() {
        // super(numberSchema);
-        super.setSchema(numberSchema);
+        super.setSchema();
     }
 
 

@@ -25,9 +25,8 @@ public abstract class BaseSchema {
     }
 
 
-    public void setSchema(Object schema) {
-        // public String schema;
-        //private String schema;
+    public void setSchema() {
+
     }
 
     private static boolean checking(Object data, String nameCheck) {
@@ -65,7 +64,7 @@ public abstract class BaseSchema {
 
     public final boolean isValid(Object data) {
 
-        Map<String, BaseSchema> shapeMap = MapSchema.validationMap;
+        Map<String, BaseSchema> shapeMap = MapSchema.getValidationMap();
         int sizeOfShapeMap = shapeMap.size();
 
         boolean retOfValid = true;

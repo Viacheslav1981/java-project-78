@@ -16,28 +16,6 @@ public class ValidatorTest {
 
 
     @Test
-    public void testVal() {
-        Validator v = new Validator();
-        StringSchema schema = v.string();
-        boolean actual;
-
-       // actual = schema.isValidTest("");
-      //  assertTrue(actual);
-
-      //  actual = schema.isValidTest(null);
-
-
-     //   actual = schema.required().minLength(6).contains("rer").isValidTest("3rerytytytyt");
-     //   assertTrue(actual);
-
-      //  actual = schema.minLength(6).isValidTest("3re");
-      //  assertFalse(actual);
-
-    }
-
-
-
-    @Test
     public void testValidStringSchema() {
         Validator v = new Validator();
         StringSchema schema = v.string();
