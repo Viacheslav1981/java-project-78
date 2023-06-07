@@ -49,9 +49,6 @@ public class ValidatorTest {
         actual = schema.minLength(10).contains("test").isValid("testing");
         assertFalse(actual);
 
-       // schema = v.string().required().minLength(5).contains("testi");
-      //  schema = v.string().required().minLength(5).contains("testi");
-      //  schema = v.string().required().minLength(5).contains("testi");
         actual = schema.required().minLength(5).contains("testi").isValid("testing");
         assertTrue(actual);
 
@@ -102,8 +99,6 @@ public class ValidatorTest {
         actual = schema.isValid(10);
         assertFalse(actual);
     }
-
-
 
     @Test
     public void testValidMapSchema() {
@@ -183,7 +178,6 @@ public class ValidatorTest {
         assertFalse(actual);
 
     }
-
 
 
 }

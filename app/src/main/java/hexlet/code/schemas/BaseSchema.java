@@ -1,29 +1,13 @@
 package hexlet.code.schemas;
 
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public abstract class BaseSchema {
-
-
-    public static final List<Object> ALL_CHECKS = new ArrayList<>();
     public static final Map<String, Check> CHECKS = new HashMap<>();
-
-
-    /*
-    public BaseSchema(Object schema) {
-        // this.schema = (String) schema;
-        this.schema = schema;
-    }
-
-     */
 
     public BaseSchema() {
     }
-
 
     public void setSchema() {
 
@@ -36,7 +20,6 @@ public abstract class BaseSchema {
         }
         return true;
     }
-
 
     private static boolean isValidOfSchema(BaseSchema kindOfSchema, Object value) {
 
@@ -95,11 +78,6 @@ public abstract class BaseSchema {
 
     public static void addChecks(String kindOfSchema, Check check) {
         CHECKS.put(kindOfSchema, check);
-
-    }
-
-    public static void addCheck(Check check) {
-        ALL_CHECKS.add(check);
 
     }
 

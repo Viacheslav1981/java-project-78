@@ -9,79 +9,32 @@ public final class MapSchema extends BaseSchema {
         return validationMap;
     }
 
-
     private static Map<String, BaseSchema> validationMap = new HashMap<>();
 
     private int size;
-
 
     public MapSchema() {
         super.setSchema();
     }
 
     public MapSchema required() {
-        // this.checkRequired = true;
 
         addChecks("requiredMap", it -> it instanceof Map<?, ?>);
 
-        addCheck(it -> it instanceof Map<?, ?>);
         return this;
     }
 
     public MapSchema sizeof(int sizeof) {
-        //  this.checkSize = true;
         this.size = sizeof;
-
         addChecks("sizeof", it -> it instanceof Map<?, ?> map && map.size() == size);
 
-        addCheck(it -> it instanceof Map<?, ?> map && map.size() == size);
         return this;
     }
 
     public MapSchema shape(Map<String, BaseSchema> validationMapTo) {
-        // this.checkShape = true;
         validationMap = validationMapTo;
 
         return this;
     }
-    /*
-
-    public boolean isValid(Object data) {
-        boolean bRet = true;
-
-
-        if ((this.checkRequired) && (!(data instanceof Map))) {
-            return false;
-        }
-
-        if (this.checkSize) {
-            Map map = (Map) data;
-            int sizeOfMap = map.size();
-            bRet = sizeOfMap == this.size;
-
-        }
-
-        if (this.checkShape) {
-            Map map = (Map) data;
-
-            for (Object o : map.entrySet()) {
-                Map.Entry<Object, Object> entry = (Map.Entry<Object, Object>) o;
-                Object key = entry.getKey();
-                Object value = entry.getValue();
-
-                if (this.validationMap.containsKey(key)) {
-                    BaseSchema shape = this.validationMap.get(key);
-                    bRet = shape.isValid(value);
-                    if (!bRet) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return bRet;
-    }
-
-     */
-
 
 }
