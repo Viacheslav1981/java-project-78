@@ -8,62 +8,59 @@ import java.util.Map;
 
 public abstract class BaseSchema {
 
-    public String schema;
-    // public Object schema;
 
-    public static final List<Object> allChecks = new ArrayList<>();
-    public static final Map<String, Check> checks = new HashMap<>();
+    // public String schema;
+    //private String schema;
+     private Object schema;
+
+    public static final List<Object> ALL_CHECKS = new ArrayList<>();
+    public static final Map<String, Check> CHECKS = new HashMap<>();
 
 
     public BaseSchema(Object schema) {
-        this.schema = (String) schema;
+       // this.schema = (String) schema;
+        this.schema = schema;
     }
 
-    public boolean checking(Object data, String nameCheck) {
-        if (checks.containsKey(nameCheck)) {
-            Check check = checks.get(nameCheck);
+    public Object getSchema() {
+        return schema;
+    }
+
+    public void setSchema(Object schema) {
+        this.schema = schema;
+    }
+
+    private static boolean checking(Object data, String nameCheck) {
+        if (CHECKS.containsKey(nameCheck)) {
+            Check check = CHECKS.get(nameCheck);
             return check.check(data);
         }
         return true;
     }
 
 
-    public boolean isValidOfSchema(BaseSchema schema, Object value) {
-        boolean retValid = true;
+    private static boolean isValidOfSchema(BaseSchema kindOfSchema, Object value) {
 
-      //  switch (schema.toString()) {
+        if (kindOfSchema instanceof StringSchema) {
 
-   //     }
-
-        if (schema instanceof StringSchema) {
-            retValid = (checking(value, "requiredString")
+            return (checking(value, "requiredString")
                     && checking(value, "minLength")
                     && checking(value, "contains"));
 
-         //   return (checking(value, "requiredString")
-         //           && checking(value, "minLength")
-         //           && checking(value, "contains"));
-
         }
-        if (schema instanceof NumberSchema) {
-            retValid = (checking(value, "requiredNumber")
+        if (kindOfSchema instanceof NumberSchema) {
+
+            return (checking(value, "requiredNumber")
                     && checking(value, "positive")
                     && checking(value, "range"));
-
-         //   return (checking(value, "requiredNumber")
-         //           && checking(value, "positive")
-        //            && checking(value, "range"));
         }
-        if (schema instanceof MapSchema) {
-            retValid = checking(value, "requiredMap")
+        if (kindOfSchema instanceof MapSchema) {
+
+            return checking(value, "requiredMap")
                     && checking(value, "sizeof");
-
-            //return checking(value, "requiredMap")
-              //      && checking(value, "sizeof");
         }
 
-        //return true;
-        return retValid;
+        return true;
     }
 
     public final boolean isValid(Object data) {
@@ -97,13 +94,13 @@ public abstract class BaseSchema {
         return retOfValid;
     }
 
-    public static void addChecks(String schema, Check check) {
-        checks.put(schema, check);
+    public static void addChecks(String kindOfSchema, Check check) {
+        CHECKS.put(kindOfSchema, check);
 
     }
 
     public static void addCheck(Check check) {
-        allChecks.add(check);
+        ALL_CHECKS.add(check);
 
     }
 
