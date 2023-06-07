@@ -27,42 +27,43 @@ public abstract class BaseSchema {
         return true;
     }
 
-    public boolean isValidOfSchema(BaseSchema schema, Object value) {
 
+    public boolean isValidOfSchema(BaseSchema schema, Object value) {
+        boolean retValid = true;
+
+      //  switch (schema.toString()) {
+
+   //     }
 
         if (schema instanceof StringSchema) {
-            /*
-            if ((!checking(value, "requiredString")
-                    || !checking(value, "minLength")
-                    || !checking(value, "contains"))) {
-                return false;
-            }
-
-             */
-            return (checking(value, "requiredString")
+            retValid = (checking(value, "requiredString")
                     && checking(value, "minLength")
                     && checking(value, "contains"));
 
+         //   return (checking(value, "requiredString")
+         //           && checking(value, "minLength")
+         //           && checking(value, "contains"));
+
         }
         if (schema instanceof NumberSchema) {
-            /*
-            if ((!checking(value, "requiredNumber")
-                    || !checking(value, "positive")
-                    || !checking(value, "range"))) {
-                return false;
-            }
-
-             */
-            return (checking(value, "requiredNumber")
+            retValid = (checking(value, "requiredNumber")
                     && checking(value, "positive")
                     && checking(value, "range"));
+
+         //   return (checking(value, "requiredNumber")
+         //           && checking(value, "positive")
+        //            && checking(value, "range"));
         }
         if (schema instanceof MapSchema) {
-            return checking(value, "requiredMap")
+            retValid = checking(value, "requiredMap")
                     && checking(value, "sizeof");
+
+            //return checking(value, "requiredMap")
+              //      && checking(value, "sizeof");
         }
 
-        return true;
+        //return true;
+        return retValid;
     }
 
     public final boolean isValid(Object data) {
@@ -95,7 +96,6 @@ public abstract class BaseSchema {
         }
         return retOfValid;
     }
-
 
     public static void addChecks(String schema, Check check) {
         checks.put(schema, check);
