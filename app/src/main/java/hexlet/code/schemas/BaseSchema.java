@@ -1,7 +1,10 @@
 package hexlet.code.schemas;
 
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public abstract class BaseSchema {
 
@@ -26,20 +29,33 @@ public abstract class BaseSchema {
 
     public boolean isValidOfSchema(BaseSchema schema, Object value) {
 
+
         if (schema instanceof StringSchema) {
+            /*
             if ((!checking(value, "requiredString")
                     || !checking(value, "minLength")
                     || !checking(value, "contains"))) {
                 return false;
             }
 
+             */
+            return (checking(value, "requiredString")
+                    && checking(value, "minLength")
+                    && checking(value, "contains"));
+
         }
         if (schema instanceof NumberSchema) {
+            /*
             if ((!checking(value, "requiredNumber")
                     || !checking(value, "positive")
                     || !checking(value, "range"))) {
                 return false;
             }
+
+             */
+            return (checking(value, "requiredNumber")
+                    && checking(value, "positive")
+                    && checking(value, "range"));
         }
         if (schema instanceof MapSchema) {
             return checking(value, "requiredMap")
@@ -80,61 +96,6 @@ public abstract class BaseSchema {
         return retOfValid;
     }
 
-    public final boolean isValidd(Object data) {
-
-        boolean isValidOk = true;
-
-        Map<String, BaseSchema> shapeMap = MapSchema.validationMap;
-        int sizeOfShapeMap = shapeMap.size();
-
-        int j = 0;
-
-        if (data instanceof Map<?, ?> && sizeOfShapeMap > 0) {
-            for (Map.Entry<?, ?> entry : ((Map<?, ?>) data).entrySet()) {
-
-                Object key = entry.getKey();
-                Object value = entry.getValue();
-
-
-                if (shapeMap.containsKey(key)) {
-                    BaseSchema shape = shapeMap.get(key);
-                    Check check = (Check) allChecks.get(j);
-
-                    if (!check.check(value)) {
-                        // allChecks.clear();
-                        return false;
-                    }
-                }
-
-                j++;
-
-            }
-
-            return true;
-
-        }
-
-        //список всех проверок... из массива?
-
-        // allChecks.stream().filter(data.getClass())
-
-
-        for (Object allCheck : allChecks) {
-            Check check = (Check) allCheck;
-
-            // Object o = allChecks.get(i).getClass();
-
-            isValidOk = check.check(data);
-            if (!check.check(data)) {
-                //  allChecks.clear();
-                return false;
-            }
-        }
-
-        // allChecks.clear();
-        return true;
-
-    }
 
     public static void addChecks(String schema, Check check) {
         checks.put(schema, check);
