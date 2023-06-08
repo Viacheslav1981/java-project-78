@@ -11,8 +11,6 @@ public final class MapSchema extends BaseSchema {
 
     private static Map<String, BaseSchema> validationMap = new HashMap<>();
 
-    private int size;
-
     public MapSchema() {
         super.setSchema();
     }
@@ -25,8 +23,8 @@ public final class MapSchema extends BaseSchema {
     }
 
     public MapSchema sizeof(int sizeof) {
-        this.size = sizeof;
-        addChecks("sizeof", it -> it instanceof Map<?, ?> map && map.size() == size);
+        // this.size = sizeof;
+        addChecks("sizeof", it -> it instanceof Map<?, ?> map && map.size() == sizeof);
 
         return this;
     }

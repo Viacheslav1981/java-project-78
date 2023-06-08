@@ -2,8 +2,6 @@ package hexlet.code.schemas;
 
 public final class StringSchema extends BaseSchema {
 
-    private int minLength = 0;
-
     public StringSchema() {
         super.setSchema();
     }
@@ -15,17 +13,13 @@ public final class StringSchema extends BaseSchema {
     }
 
     public StringSchema minLength(int length) {
-        this.minLength = length;
-        addChecks("minLength", it -> it instanceof String s && s.length() >= minLength);
+        addChecks("minLength", it -> it instanceof String s && s.length() >= length);
 
         return this;
     }
 
     public StringSchema contains(String str) {
-        Check check;
-        check = it -> it instanceof String s && s.contains(str);
-
-        addChecks("contains", check);
+        addChecks("contains", it -> it instanceof String s && s.contains(str));
 
         return this;
     }

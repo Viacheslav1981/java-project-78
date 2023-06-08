@@ -2,9 +2,6 @@ package hexlet.code.schemas;
 
 public final class NumberSchema extends BaseSchema {
 
-    private int limit1;
-    private int limit2;
-
     public NumberSchema() {
         super.setSchema();
     }
@@ -22,11 +19,8 @@ public final class NumberSchema extends BaseSchema {
     }
 
     public NumberSchema range(int range1, int range2) {
-        this.limit1 = range1;
-        this.limit2 = range2;
-
-        addChecks("range", it -> it instanceof Integer i && i >= limit1
-                && i <= limit2 || it == null);
+        addChecks("range", it -> it instanceof Integer i && i >= range1
+                && i <= range2 || it == null);
 
         return this;
     }

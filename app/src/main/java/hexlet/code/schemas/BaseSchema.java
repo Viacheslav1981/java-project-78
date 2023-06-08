@@ -1,6 +1,8 @@
 package hexlet.code.schemas;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class BaseSchema {
@@ -21,6 +23,7 @@ public abstract class BaseSchema {
         return true;
     }
 
+
     private static boolean isValidOfSchema(BaseSchema kindOfSchema, Object value) {
 
         if (kindOfSchema instanceof StringSchema) {
@@ -30,6 +33,7 @@ public abstract class BaseSchema {
                     && checking(value, "contains"));
 
         }
+
         if (kindOfSchema instanceof NumberSchema) {
 
             return (checking(value, "requiredNumber")
