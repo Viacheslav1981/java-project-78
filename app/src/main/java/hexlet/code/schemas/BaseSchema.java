@@ -37,19 +37,14 @@ public abstract class BaseSchema {
 
     public final boolean checking(Object data) {
 
-        boolean retOfValid;
-        Check check;
-
         for (Map.Entry<String, Check> entry : CHECKS.entrySet()) {
 
             String base = this.getClass().getName().substring(20);
-            check = entry.getValue();
+            Check check = entry.getValue();
             String str = check.getClass().getName();
 
             if (str.contains(base)) {
-                retOfValid = check.check(data);
-
-                if (!(retOfValid)) {
+                if (!(check.check(data))) {
                     return false;
                 }
             }
