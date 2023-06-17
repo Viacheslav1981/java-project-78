@@ -7,24 +7,19 @@ public final class StringSchema extends BaseSchema {
     }
 
     public StringSchema required() {
-         addChecks("requiredString", it -> it instanceof String && it != "");
-      //  addChecks(it -> it instanceof String && it != "", this);
+        addChecks("requiredString", it -> it instanceof String && it != "");
 
         return this;
     }
 
     public StringSchema minLength(int length) {
-         addChecks("minLength", it -> it instanceof String s && s.length() >= length);
-        //   addChecks(this, it -> it instanceof String s && s.length() >= length);
-
-      //  addChecks(it -> it instanceof String s && s.length() >= length, this);
+        addChecks("minLength", it -> it instanceof String s && s.length() >= length);
 
         return this;
     }
 
     public StringSchema contains(String str) {
-         addChecks("contains", it -> it instanceof String s && s.contains(str));
-      //  addChecks(it -> it instanceof String s && s.contains(str), this);
+        addChecks("contains", it -> it instanceof String s && s.contains(str));
 
         return this;
     }

@@ -16,19 +16,13 @@ public final class MapSchema extends BaseSchema {
     }
 
     public MapSchema required() {
-
         addChecks("requiredMap", it -> it instanceof Map<?, ?>);
-      //  addChecks(this, it -> it instanceof Map<?, ?>);
-      //  addChecks(it -> it instanceof Map<?, ?>, this);
 
         return this;
     }
 
     public MapSchema sizeof(int sizeof) {
-        // this.size = sizeof;
         addChecks("sizeof", it -> it instanceof Map<?, ?> map && map.size() == sizeof);
-       // addChecks(this, it -> it instanceof Map<?, ?> map && map.size() == sizeof);
-      //  addChecks(it -> it instanceof Map<?, ?> map && map.size() == sizeof, this);
 
         return this;
     }
