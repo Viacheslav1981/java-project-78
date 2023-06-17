@@ -9,6 +9,8 @@ public final class MapSchema extends BaseSchema {
         return validationMap;
     }
 
+
+
     private static Map<String, BaseSchema> validationMap = new HashMap<>();
 
     public MapSchema() {

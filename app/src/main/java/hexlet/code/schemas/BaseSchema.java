@@ -6,6 +6,8 @@ import java.util.Map;
 public abstract class BaseSchema {
     public static final Map<String, Check> CHECKS = new HashMap<>();
 
+    public abstract BaseSchema required();
+
     public final boolean isValid(Object data) {
 
         boolean retOfValid = true;
