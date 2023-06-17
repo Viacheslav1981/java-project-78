@@ -6,81 +6,62 @@ import java.util.Map;
 public abstract class BaseSchema {
     public static final Map<String, Check> CHECKS = new HashMap<>();
 
-    public BaseSchema() {
-    }
-
-    public void setSchema() {
-
-    }
-
-    private static boolean checking(Object data, String nameCheck) {
-        if (CHECKS.containsKey(nameCheck)) {
-            Check check = CHECKS.get(nameCheck);
-            return check.check(data);
-        }
-        return true;
-    }
-
-
-    private static boolean isValidOfSchema(BaseSchema kindOfSchema, Object value) {
-
-        if (kindOfSchema instanceof StringSchema) {
-
-            return (checking(value, "requiredString")
-                    && checking(value, "minLength")
-                    && checking(value, "contains"));
-
-        }
-
-        if (kindOfSchema instanceof NumberSchema) {
-
-            return (checking(value, "requiredNumber")
-                    && checking(value, "positive")
-                    && checking(value, "range"));
-        }
-        if (kindOfSchema instanceof MapSchema) {
-
-            return checking(value, "requiredMap")
-                    && checking(value, "sizeof");
-        }
-
-        return true;
-    }
-
     public final boolean isValid(Object data) {
+
+        boolean retOfValid = true;
 
         Map<String, BaseSchema> shapeMap = MapSchema.getValidationMap();
         int sizeOfShapeMap = shapeMap.size();
 
-        boolean retOfValid = true;
-
         if (data instanceof Map<?, ?> && sizeOfShapeMap > 0) {
-            for (Map.Entry<?, ?> entry : ((Map<?, ?>) data).entrySet()) {
+            for (Map.Entry<?, ?> enter : ((Map<?, ?>) data).entrySet()) {
 
-                Object key = entry.getKey();
-                Object value = entry.getValue();
+                Object nameForCheck = enter.getKey();
+                Object valueForCheck = enter.getValue();
 
-                if (shapeMap.containsKey(key)) {
-                    BaseSchema shape = shapeMap.get(key);
-                    retOfValid = isValidOfSchema(shape, value);
+                if (shapeMap.containsKey(nameForCheck)) {
 
-                    if (!retOfValid) {
+                    if (!(shapeMap.get(nameForCheck).checking(valueForCheck))) {
                         return false;
                     }
 
                 }
 
             }
-
         } else {
-            retOfValid = isValidOfSchema(this, data);
+            retOfValid = checking(data);
         }
+
         return retOfValid;
     }
 
-    public static void addChecks(String kindOfSchema, Check check) {
-        CHECKS.put(kindOfSchema, check);
+    public final boolean checking(Object data) {
+
+        boolean retOfValid;
+        Check check;
+
+        for (Map.Entry<String, Check> entry : CHECKS.entrySet()) {
+
+            String base = this.getClass().getName().substring(20);
+            check = entry.getValue();
+            String str = check.getClass().getName();
+
+            if (str.contains(base)) {
+                retOfValid = check.check(data);
+
+                if (!(retOfValid)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static void addChecks(String nameCheck, Check check) {
+        CHECKS.put(nameCheck, check);
 
     }
 
+    protected void setSchema() {
+    }
 }
