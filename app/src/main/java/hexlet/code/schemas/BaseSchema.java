@@ -43,10 +43,8 @@ public abstract class BaseSchema {
             Check check = entry.getValue();
             String str = check.getClass().getName();
 
-            if (str.contains(base)) {
-                if (!(check.check(data))) {
-                    return false;
-                }
+            if ((str.contains(base)) && !(check.check(data))) {
+                return false;
             }
         }
         return true;
