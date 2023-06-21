@@ -6,13 +6,11 @@ public final class MapSchema extends BaseSchema {
 
     public MapSchema required() {
         addChecks(it -> it instanceof Map<?, ?>);
-
         return this;
     }
 
     public MapSchema sizeof(int sizeof) {
         addChecks(it -> it instanceof Map<?, ?> map && map.size() == sizeof);
-
         return this;
     }
 
